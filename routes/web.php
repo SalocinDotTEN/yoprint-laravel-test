@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProcessCSVController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('uploader');
+});
+
+Route::controller(ProcessCSVController::class)->group(function(){
+    Route::post('/csv-uploader', 'storeCsv');
 });

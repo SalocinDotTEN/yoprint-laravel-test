@@ -10,7 +10,7 @@
 
 <body>
     <div class="container mt-5">
-        <form action="/csv-uploader" method="post">
+        <form action="/csv-uploader" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="csv_file">CSV File</label>
