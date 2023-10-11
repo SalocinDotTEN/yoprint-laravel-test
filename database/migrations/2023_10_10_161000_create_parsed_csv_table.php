@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parsed_csv', function (Blueprint $table) {
-            $table->id();
-            $table->integer('UNIQUE_KEY');
+            $table->integer('UNIQUE_KEY')->unique()->primary();
             $table->string('PRODUCT_TITLE');
             $table->string('PRODUCT_DESCRIPTION');
             $table->string('STYLE#');
@@ -21,7 +20,6 @@ return new class extends Migration
             $table->string('SIZE');
             $table->string('COLOR_NAME');
             $table->float('PIECE_PRICE');
-            $table->timestamps();
         });
     }
 

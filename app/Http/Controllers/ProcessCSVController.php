@@ -57,13 +57,13 @@ class ProcessCSVController extends Controller
 
         // Build the file path
         $filePath = "upload/{$mime}/{$dateFolder}";
-        $finalPath = storage_path("app/public/" . $filePath);
+        $finalPath = storage_path("app/" . $filePath);
 
         // move the file name
         $file->move($finalPath, $file->getClientOriginalName());
 
         return response()->json([
-            'path' => asset('storage/' . $filePath),
+            'path' => $finalPath."/".$file->getClientOriginalName(),
             'name' => $file->getClientOriginalName(),
             'mime_type' => $mime
         ]);

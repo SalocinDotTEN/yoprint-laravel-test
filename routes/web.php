@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProcessCSVController;
+use App\Http\Controllers\CsvToDbController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,8 @@ Route::get('/', function () {
 
 Route::controller(ProcessCSVController::class)->group(function(){
     Route::post('/csv-uploader', 'storeCsv');
+});
+
+Route::controller(CsvToDbController::class)->group(function(){
+    Route::post('/csv-to-db', 'updatedb');
 });
