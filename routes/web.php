@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProcessCSVController;
 use App\Http\Controllers\CsvToDbController;
+use App\Http\Controllers\ShowDatabaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,8 @@ Route::controller(ProcessCSVController::class)->group(function(){
 
 Route::controller(CsvToDbController::class)->group(function(){
     Route::post('/csv-to-db', 'updatedb');
+});
+
+Route::controller(ShowDatabaseController::class)->group(function(){
+    Route::get('/dbviewer', 'index');
 });
