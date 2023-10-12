@@ -82,43 +82,26 @@
             document.getElementById('fileName').innerHTML = response.name;
             document.getElementById('fileStatus').innerHTML = "Uploaded";
 
+            document.getElementById('browseFile').disabled = true;
             fetch('/csv-to-db', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    _token: "{{ csrf_token() }}",
-                    filepath: response.path
-                })
-            }).then(output => output.json())
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        _token: "{{ csrf_token() }}",
+                        filepath: response.path
+                    })
+                }).then(output => output.json())
                 .then(data => {
+                    document.getElementById('browseFile').disabled = false;
                     console.log('Success:', data);
                 })
                 .catch((error) => {
+                    alert('Error:', error);
                     console.error('Error:', error);
                 });
 
-            //Make an AJAX post in vanilla javascript to dbcontroller route
-            // var xhttp = new XMLHttpRequest();
-            // xhttp.open("POST", "/csv-to-db", true);
-            // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            // xhttp.onreadystatechange = function() {
-            //     if (this.readyState == 4 && this.status == 200) {
-            //         console.log("Success");
-            //     }
-            // };
-            // xhttp.send("filepath=" + response.path + "/" + response.name);
-
-            // if (response.mime_type.includes("image")) {
-            //     $('#imagePreview').attr('src', response.path + '/' + response.name).show();
-            // }
-
-            // if (response.mime_type.includes("video")) {
-            //     $('#videoPreview').attr('src', response.path + '/' + response.name).show();
-            // }
-
-            // $('.card-footer').show();
         });
 
         resumable.on('fileError', function(file, response) { // trigger when there is any error
